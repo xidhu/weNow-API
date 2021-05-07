@@ -100,10 +100,9 @@ app.post("/weather/id",parser,(req,res)=>{
             "cityName":removeDiacritics(data.name),
             "countryName":getCountry(data.sys.country),
             "currentWeather":data.weather[0].main,
-            "weatherIcon":data.weather[0].icon,
+            "weatherIcon":"http://openweathermap.org/img/w/"+data.weather[0].icon+".png",
             "currentTemperature":data.main.temp,
         })
-        
     }).catch((err)=>{
         res.json({status:error});
     })
@@ -121,7 +120,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
                 "time":hdata.dt,
                 "temperature":hdata.temp,
                 "weather":hdata.weather[0].main,
-                "weatherIcon":hdata.weather[0].icon,
+                "weatherIcon":"http://openweathermap.org/img/w/"+hdata.weather[0].icon+".png",
             }
         })
 
@@ -130,13 +129,14 @@ app.post("/weather/coord/full",parser,(req,res)=>{
                 "time":hdata.dt,
                 "temperature":hdata.temp.day,
                 "weather":hdata.weather[0].main,
-                "weatherIcon":hdata.weather[0].icon,
+                "weatherIcon":"http://openweathermap.org/img/w/"+hdata.weather[0].icon+".png",
             }
+            
         })
         res.json({
             "date":data.current.dt,
             "currentWeather":data.current.weather[0].main,
-            "weatherIcon":data.current.weather[0].icon,
+            "weatherIcon":"http://openweathermap.org/img/w/"+data.current.weather[0].icon+".png",
             "currentTemperature":data.current.temp,
             "currentPrecipitation":data.current.dew_point,
             "currentWind":data.current.wind_speed,
@@ -144,6 +144,8 @@ app.post("/weather/coord/full",parser,(req,res)=>{
             "hourlyData":hourlyData,
             "dailyData":dailyData
         })
+
+        
         
     }).catch((err)=>{
         res.json({status:error});
