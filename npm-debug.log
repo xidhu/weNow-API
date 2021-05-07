@@ -1,0 +1,31 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'test' ]
+2 info using npm@3.5.2
+3 info using node@v8.10.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle wenowapi@1.0.0~pretest: wenowapi@1.0.0
+6 silly lifecycle wenowapi@1.0.0~pretest: no script for pretest, continuing
+7 info lifecycle wenowapi@1.0.0~test: wenowapi@1.0.0
+8 verbose lifecycle wenowapi@1.0.0~test: unsafe-perm in lifecycle true
+9 verbose lifecycle wenowapi@1.0.0~test: PATH: /usr/share/npm/bin/node-gyp-bin:/mnt/Work/Projects/Flutter/WeNow/server/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+10 verbose lifecycle wenowapi@1.0.0~test: CWD: /mnt/Work/Projects/Flutter/WeNow/server
+11 silly lifecycle wenowapi@1.0.0~test: Args: [ '-c', 'nodemon index.js' ]
+12 silly lifecycle wenowapi@1.0.0~test: Returned: code: 1  signal: null
+13 info lifecycle wenowapi@1.0.0~test: Failed to exec test script
+14 error Test failed.  See above for more details.
+15 verbose exit [ 1, true ]
+16 verbose stack Error: write EIO
+16 verbose stack     at _errnoException (util.js:1022:11)
+16 verbose stack     at WriteWrap.afterWrite [as oncomplete] (net.js:880:14)
+17 verbose cwd /mnt/Work/Projects/Flutter/WeNow/server
+18 error Linux 5.4.0-72-generic
+19 error argv "/usr/bin/node" "/usr/bin/npm" "test"
+20 error node v8.10.0
+21 error npm  v3.5.2
+22 error code EIO
+23 error errno EIO
+24 error syscall write
+25 error write EIO
+26 error If you need help, you may report this error at:
+26 error     <https://github.com/npm/npm/issues>
+27 verbose exit [ 1, true ]

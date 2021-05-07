@@ -1,0 +1,17 @@
+{
+  "name": "wenowapi",
+  "version": "1.0.0",
+  "description": "The Weather API",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "author": "xidhu",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.7",
+    "regex-parser": "^2.2.11"
+  },
+  "devDependencies": {}
+}
