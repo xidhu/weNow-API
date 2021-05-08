@@ -11,7 +11,7 @@ const parser = body_parser.json({extended:true})
 const app = express()
 const port = process.env.PORT||3000
 const url = "http://api.openweathermap.org/data/2.5/";
-const apiKey = "&appid=5b623ff965433225620d2775590311a0"
+const apiKey = "&appid=API_ID"
 const cities = JSON.parse( fs.readFileSync("cities.json"));
 const countries = JSON.parse( fs.readFileSync("countries.json"));
 
