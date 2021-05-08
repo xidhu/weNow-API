@@ -383,7 +383,10 @@ table td {
 }
 
 .footer{
+    display: flex;
     background-color: rgb(35, 43, 51);
+    align-items: center;
+    justify-content: space-between;
 }
 
 h5{
@@ -391,6 +394,11 @@ h5{
     color: white;
     font-family: 'Open Sans';
     font-size: 1rem;
+}
+
+.footer-logo{
+    margin-right: 1rem;
+    display: flex;
 }
 
   
