@@ -357,15 +357,18 @@ a:hover{
 
  table {
 
-     
+    background-color: #dbdbdb;
+    font-family: 'Roboto';
+    font-family: 700;
     font-size: 1rem;
-
+    color: #4e4e4e;
     border-collapse: collapse;
     border-spacing: 0;
 }
 
  table th {
-    font-size: 0.925em;
+     color: #4e4e4e;
+    font-size: 1rem;
     padding: 5px 18px 5px 0;
     border-bottom: 1px solid #acacac;
     vertical-align: bottom;
@@ -373,13 +376,13 @@ a:hover{
     line-height: 1.6;
 }
 table td {
+    font-family: 'Source Code Pro', monospace;
     padding: 5px 18px 5px 0;
     text-align: left;
     vertical-align: top;
     line-height: 1.6;
-    font-family: 'Roboto', sans-serif;
     font-weight: 300;
-    color: #4e4e4e;
+    color: #666666;
 }
 
 .footer{
@@ -387,6 +390,7 @@ table td {
     background-color: rgb(35, 43, 51);
     align-items: center;
     justify-content: space-between;
+    
 }
 
 h5{
@@ -394,10 +398,13 @@ h5{
     color: white;
     font-family: 'Open Sans';
     font-size: 0.7rem;
+    display: inline-block;
+    
 }
 
 .footer-logo{
     margin-right: 1rem;
+    margin-left: 0.4rem;
     display: flex;
 }
 
