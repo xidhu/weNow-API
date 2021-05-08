@@ -65,7 +65,8 @@ body{
     
 }
 body{
-    position:relative;
+    
+    width: 100%;
 }
 
 
@@ -272,7 +273,10 @@ a:hover{
   
 
   .pre{
-    margin: 2rem;
+      word-wrap: none;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     line-height: 3rem;
     color: #b9b9b9;
   }
@@ -325,6 +329,8 @@ a:hover{
   }
 
   .code-i{
+    word-wrap: break-word;
+      max-width: 100%;
       margin: 1rem;
       background-color: #dbdbdb;
       border-radius: 0.2rem;
