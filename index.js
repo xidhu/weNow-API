@@ -11,7 +11,7 @@ const parser = body_parser.json({extended:true})
 const app = express()
 const port = process.env.PORT||3000
 const url = "http://api.openweathermap.org/data/2.5/";
-const apiKey = "&appid=API_ID"
+const apiKey = "&appid=5b623ff965433225620d2775590311a0"
 const cities = JSON.parse( fs.readFileSync("cities.json"));
 const countries = JSON.parse( fs.readFileSync("countries.json"));
 
@@ -133,6 +133,17 @@ app.post("/weather/coord/full",parser,(req,res)=>{
             }
             
         })
+
+        let tommorowData = {
+            "date":data.daily[1].dt,
+            "temperature":(data.daily[1].temp.min +data.daily[1].temp.max)/2,
+            "precipitation":data.daily[1].dew_point,
+            "wind":data.daily[1].wind_speed,
+            "humidity":data.daily[1].humidity,
+            "weather":data.daily[1].weather[0].main,
+            "weatherIcon":"http://openweathermap.org/img/w/"+data.daily[1].weather[0].icon+".png",
+
+        }
         res.json({
             "date":data.current.dt,
             "currentWeather":data.current.weather[0].main,
@@ -141,6 +152,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
             "currentPrecipitation":data.current.dew_point,
             "currentWind":data.current.wind_speed,
             "currentHumidity":data.current.humidity,
+            "tommorrowData":tommorowData,
             "hourlyData":hourlyData,
             "dailyData":dailyData
         })
