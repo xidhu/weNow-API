@@ -1,6 +1,21 @@
 
 
 
+module.exports.uniqueSort = (list,key) =>{
+  const compare = ( a, b ) =>{
+    if ( a[key] < b[key] ){
+      return -1;
+    }
+    if ( a[key] > b[key] ){
+      return 1;
+    }
+    return 0;
+  }
+  
+  return [...new Map(list.sort(compare).map(o =>[o["age"], o])).values()];
+
+}
+
 
 
 module.exports.isNear = (lat1,lon1,lat2,lon2,radius) =>{

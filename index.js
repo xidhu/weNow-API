@@ -3,7 +3,7 @@ const body_parser = require("body-parser")
 const axios = require('axios').default
 const fs = require('fs');
 const reg_ex_parser = require('regex-parser');
-const {unique,isNear,removeDiacritics} = require("./functions")
+const {uniqueSort,isNear,removeDiacritics} = require("./functions")
 var path = require('path')
 
 const parser = body_parser.json({extended:true})
@@ -31,6 +31,16 @@ const getCountry = (countryCode) =>{
     return matched_country;
 }
 
+const isIdValid = (cityId) =>{
+    var isValid = false;
+    cities.forEach(city => {
+        if(city.id == cityId){
+            isValid = true;
+        }
+    });
+    return isValid;
+}
+
 
 const getCities = (cityName,byCoordinates,lat,lon) =>{
     let matched_cities = [];
@@ -43,9 +53,9 @@ const getCities = (cityName,byCoordinates,lat,lon) =>{
             }
         });
     }else{
-        let matcher = reg_ex_parser("/"+cityName+"/gi");
+        let city_name = cityName.toLowerCase().replace(" ","");
         cities.forEach(city => {
-            if(city.name.toLowerCase().replace(" ","").match(matcher) && limiter < 6){
+            if(city.name.toLowerCase().replace(" ","").substring(0,city_name.length) == city_name && limiter < 6){
                 matched_cities.push(city);
                 limiter++
             }
@@ -68,13 +78,18 @@ app.post("/city/query",parser,(req,res)=>{
             "lat":city.coord.lat
         }
     });
-    res.json(cities);
+    res.json(uniqueSort(cities,"cityName"));
 });
 
 
 app.post("/city/coord",parser,(req,res)=>{
     let lon = req.body.lon
     let lat = req.body.lat
+    if(!(-90 < lat && lat < 90) ||!(-180 < lon && lon < 180)){
+        res.json({
+            "error":"Invalid Coordinates"
+        });
+    }else{
     let cities = getCities("",true,lat,lon).map((city)=>{
         return {
             "locId":city.id,
@@ -84,12 +99,17 @@ app.post("/city/coord",parser,(req,res)=>{
             "lat":city.coord.lat
         }
     });
-    res.json(cities);
-
+    res.json(uniqueSort(cities,"cityName"));
+    }
 })
 
 app.post("/weather/id",parser,(req,res)=>{
     let id = req.body.id
+    if(!isIdValid(id)){
+        res.json({
+            "error":"Invalid Id"
+        });
+    }else{
     let requestUrl = url+"weather?id="+id+apiKey
     axios.get(requestUrl).then((resp)=>{
         
@@ -106,12 +126,17 @@ app.post("/weather/id",parser,(req,res)=>{
     }).catch((err)=>{
         res.json({status:error});
     })
-    
+}
 })
 
 app.post("/weather/coord/full",parser,(req,res)=>{
     let lon = req.body.lon
     let lat = req.body.lat
+    if(!(-90 < lat && lat < 90) ||!(-180 < lon && lon < 180)){
+        res.json({
+            "error":"Invalid Coordinates"
+        });
+    }else{
     let requestUrl = url+"onecall?lat="+lat+"&lon="+lon+"&exclude=alerts"+apiKey
     axios.get(requestUrl).then((resp)=>{
         let data = resp.data
@@ -137,7 +162,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
         let tommorowData = {
             "date":data.daily[1].dt,
             "temperature":(data.daily[1].temp.min +data.daily[1].temp.max)/2,
-            "precipitation":data.daily[1].dew_point,
+            "uvi":data.daily[1].uvi,
             "wind":data.daily[1].wind_speed,
             "humidity":data.daily[1].humidity,
             "weather":data.daily[1].weather[0].main,
@@ -149,7 +174,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
             "currentWeather":data.current.weather[0].main,
             "weatherIcon":"http://openweathermap.org/img/w/"+data.current.weather[0].icon+".png",
             "currentTemperature":data.current.temp,
-            "currentPrecipitation":data.current.dew_point,
+            "uvi":data.current.uvi,
             "currentWind":data.current.wind_speed,
             "currentHumidity":data.current.humidity,
             "tommorrowData":tommorowData,
@@ -162,7 +187,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
     }).catch((err)=>{
         res.json({status:error});
     })
-    
+} 
 })
 
 app.listen(port, () => console.log("Listening to port "+port))
