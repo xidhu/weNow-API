@@ -120,7 +120,7 @@ app.post("/weather/id",parser,(req,res)=>{
             "cityName":removeDiacritics(data.name),
             "countryName":getCountry(data.sys.country),
             "currentWeather":data.weather[0].main,
-            "weatherIcon":"http://openweathermap.org/img/w/"+data.weather[0].icon+".png",
+            "weatherIcon":data.weather[0].icon,
             "currentTemperature":data.main.temp,
         })
     }).catch((err)=>{
@@ -145,7 +145,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
                 "time":hdata.dt,
                 "temperature":hdata.temp,
                 "weather":hdata.weather[0].main,
-                "weatherIcon":"http://openweathermap.org/img/w/"+hdata.weather[0].icon+".png",
+                "weatherIcon":hdata.weather[0].icon,
             }
         })
 
@@ -154,7 +154,7 @@ app.post("/weather/coord/full",parser,(req,res)=>{
                 "time":hdata.dt,
                 "temperature":hdata.temp.day,
                 "weather":hdata.weather[0].main,
-                "weatherIcon":"http://openweathermap.org/img/w/"+hdata.weather[0].icon+".png",
+                "weatherIcon":hdata.weather[0].icon,
             }
             
         })
@@ -166,13 +166,13 @@ app.post("/weather/coord/full",parser,(req,res)=>{
             "wind":data.daily[1].wind_speed,
             "humidity":data.daily[1].humidity,
             "weather":data.daily[1].weather[0].main,
-            "weatherIcon":"http://openweathermap.org/img/w/"+data.daily[1].weather[0].icon+".png",
+            "weatherIcon":data.daily[1].weather[0].icon,
 
         }
         res.json({
             "date":data.current.dt,
             "currentWeather":data.current.weather[0].main,
-            "weatherIcon":"http://openweathermap.org/img/w/"+data.current.weather[0].icon+".png",
+            "weatherIcon":data.current.weather[0].icon,
             "currentTemperature":data.current.temp,
             "uvi":data.current.uvi,
             "currentWind":data.current.wind_speed,
