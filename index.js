@@ -99,7 +99,7 @@ app.post("/city/coord",parser,(req,res)=>{
             "lat":city.coord.lat
         }
     });
-    res.json(uniqueSort(cities,"cityName"));
+    res.json(cities);
     }
 })
 
