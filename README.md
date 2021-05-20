@@ -10,7 +10,7 @@
 WeNowAPI is a simple weather forecast API, which uses [OpenWeatherMapAPI](https://openweathermap.org/) to fetch 8 day / 1 hour forecast data.
 
 
-* 5000+ cities weather data available.
+* 5000+ cities.
 * 10 Days weather forecast.
 * 3 days hourly forecast.
 
