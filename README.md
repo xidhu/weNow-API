@@ -6,7 +6,7 @@
 
 
 
-# We Now API
+# WeNow API
 WeNowAPI is a simple weather forecast API, which uses [OpenWeatherMapAPI](https://openweathermap.org/) to fetch 8 day / 1 hour forecast data.
 
 
