@@ -12,7 +12,7 @@ module.exports.uniqueSort = (list,key) =>{
     return 0;
   }
   
-  return [...new Map(list.sort(compare).map(o =>[o["age"], o])).values()];
+  return [...new Map(list.sort(compare).map(o =>[o["cityName"], o])).values()];
 
 }
 
